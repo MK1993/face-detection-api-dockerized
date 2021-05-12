@@ -29,7 +29,7 @@ app.get('/profile/:id', (req,res)=>handleprofile.profile(req,res,db))
 app.put('/image',(req,res)=>handleimage.image(req,res,db))
 app.post('/imageurl',(req,res)=>handleimage.imageurl(req,res))
 
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 3000
 app.listen(PORT,()=>{
   console.log(`Server started at port ${PORT}`)
 })
