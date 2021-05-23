@@ -1,4 +1,4 @@
-# Face-recognition-backend
+# Face-detection-api
 
 It's a web application where you can register and sign in then after selecting a picture it will automatically detects faces in the picture from URL in real-time.
 This app uses the following technologies:
