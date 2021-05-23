@@ -4,8 +4,6 @@ It's a web application where you can register and sign in then after selecting a
 This app uses the following technologies:
 React, Express, Node, Clarifai API Machine Learning Face Recognition App, Knex PostgreSQL DB, and Bcrypt for secure Signing-Registering. Deployed on Heroku.
 
-Final project for ZTM course
-
 1. Clone this repo
 2. Run npm install
 3. Run npm start
