@@ -1,12 +1,1 @@
-const profile = (req,res,db) => {
-    const {id}=req.params
-    db.select('*').from('users').where({id})
-    .then(user=>{
-        if(user.length !== 0){
-            return res.json(user)
-        } res.status(400).json('not found!')
-    })
-    .catch(err=>res.status(400).json('error getting user!'))
-}
-
-module.exports= {profile}
+const profile=(e,s,t)=>{const{id:o}=e.params;t.select("*").from("users").where({id:o}).then(e=>{if(0!==e.length)return s.json(e);s.status(400).json("not found!")}).catch(e=>s.status(400).json("error getting user!"))};module.exports={profile:profile};
