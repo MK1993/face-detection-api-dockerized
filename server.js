@@ -23,7 +23,7 @@ app.use(express.json())
 app.use(cors())
 
 app.get('/', (req,res) => handlemain.main(req,res,db))
-app.post('/signin', (req,res) => handlesignin.signin(req,res,bcrypt,db))
+app.post('/signin', (req,res) => handlesignin.signinAuthentication(req,res,bcrypt,db))
 app.post('/register', (req, res) => handleregister.register(req,res,bcrypt,db))
 app.get('/profile/:id', (req,res)=>handleprofile.profileGet(req,res,db))
 app.post('/profile/:id', (req, res) => handleprofile.profileUpdate(req,res,db))

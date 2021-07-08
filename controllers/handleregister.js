@@ -1,1 +1,34 @@
-const register=(e,t,n,s)=>{const{name:r,email:a,password:i}=e.body,o=n.hashSync(i,10);0!==r.length&&0!==a.length&&0!==i.length||t.status(400).json("Wrong inputs criteria"),s.transaction(e=>{s("login").returning("email").insert({hash:o,email:a}).transacting(e).then(e=>{s("users").returning("*").insert({name:r,email:e[0],joined:new Date}).then(e=>t.json(e[0]))}).then(e.commit).catch(e.rollback)}).catch(e=>t.status(400).json("unable to register!"))};module.exports={register:register};
+const register = (req, res, db, bcrypt) => {
+    const { email, name, password } = req.body;
+    if (!email || !name || !password) {
+      return res.status(400).json('incorrect form submission');
+    }
+    const hash = bcrypt.hashSync(password);
+      db.transaction(trx => {
+        trx.insert({
+          hash: hash,
+          email: email
+        })
+        .into('login')
+        .returning('email')
+        .then(loginEmail => {
+          return trx('users')
+            .returning('*')
+            .insert({
+              email: loginEmail[0],
+              name: name,
+              joined: new Date()
+            })
+            .then(user => {
+              res.json(user[0]);
+            })
+        })
+        .then(trx.commit)
+        .catch(trx.rollback)
+      })
+      .catch(err => res.status(400).json('unable to register'))
+  }
+  
+  module.exports = {
+    register: register
+  };
