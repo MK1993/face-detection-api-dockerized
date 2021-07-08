@@ -22,7 +22,7 @@ const createSession = (user) => {
     .catch(console.log);
 };
 
-const signin = (db, bcrypt, req, res) => {
+const signin = (req,res,bcrypt,db) => {
   const { email, password } = req.body;
   if (!email || !password) {
     return Promise.reject('incorrect form submission');
@@ -53,12 +53,11 @@ const getAuthTokenId = (req, res) => {
   });
 }
 
-const signinAuthentication = (db, bcrypt , req, res) => {
+const signinAuthentication = (req,res,bcrypt,db) => {
   const { authorization } = req.headers;
   return authorization ? getAuthTokenId(req, res)
-    : signin(db, bcrypt, req, res)
-    .then(data =>
-      data.id && data.email ? createSession(data) : Promise.reject(data))
+    : signin(req,res,bcrypt,db)
+    .then(data => data.id && data.email ? createSession(data) : Promise.reject(data))
     .then(session => res.json(session))
     .catch(err => res.status(400).json(err));
 }
