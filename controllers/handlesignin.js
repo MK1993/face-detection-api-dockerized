@@ -13,14 +13,14 @@ const signToken = (email) => {
   return jwt.sign(jwtPayload, 'JWT_SECRET_KEY', { expiresIn: '2 days'});
 };
 
-const setToken = (key, value) => Promise.resolve(redisClient.set(key, value));
+const setToken = (key, value) => {return Promise.resolve(redisClient.set(key, value))};
 
 const createSession = (user) => {
   const { email, id } = user;
   const token = signToken(email);
   return setToken(token, id)
     .then(() => {
-      return { success: 'true', userId: id, token, user }
+      return { success: 'true', userId: id, token }
     })
     .catch(console.log);
 };
@@ -38,12 +38,12 @@ const signin = (req,res,bcrypt,db) => {
         return db.select('*').from('users')
           .where('email', '=', email)
           .then(user => user[0])
-          .catch(err => res.status(400).json('unable to get user'))
+          .catch(err => Promise.reject(err))
       } else {
         return Promise.reject('wrong credentials');
       }
     })
-    .catch(err => err)
+    .catch(err => Promise.reject(err))
 }
 
 const getAuthTokenId = (req, res) => {

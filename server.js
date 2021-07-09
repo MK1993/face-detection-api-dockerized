@@ -6,6 +6,7 @@ handlesignin = require('./controllers/handlesignin'),
 handleprofile = require('./controllers/handleprofile'),
 handleimage = require('./controllers/handleimage'),
 handleregister = require('./controllers/handleregister')
+auth = require('./controllers/authorization');
 
 const knex = require('knex'),
 db=knex({
@@ -25,10 +26,10 @@ app.use(cors())
 app.get('/', (req,res) => handlemain.main(req,res,db))
 app.post('/signin', (req,res) => handlesignin.signinAuthentication(req,res,bcrypt,db))
 app.post('/register', (req, res) => handleregister.register(req,res,bcrypt,db))
-app.get('/profile/:id', (req,res)=>handleprofile.profileGet(req,res,db))
-app.post('/profile/:id', (req, res) => handleprofile.profileUpdate(req,res,db))
-app.put('/image',(req,res)=>handleimage.image(req,res,db))
-app.post('/imageurl',(req,res)=>handleimage.imageurl(req,res))
+app.get('/profile/:id', auth.requireAuth, (req,res)=>handleprofile.profileGet(req,res,db))
+app.post('/profile/:id', auth.requireAuth, (req, res) => handleprofile.profileUpdate(req,res,db))
+app.put('/image', auth.requireAuth, (req,res)=>handleimage.image(req,res,db))
+app.post('/imageurl', auth.requireAuth, (req,res)=>handleimage.imageurl(req,res))
 
 const port= process.env.PORT || 3000
 app.listen(port,()=>{
