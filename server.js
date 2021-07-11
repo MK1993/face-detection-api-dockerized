@@ -21,9 +21,21 @@ db=knex({
 });
 
 const app = express();
-app.use(express.json())
-app.use(cors())
+
+const whitelist = ['http://localhost:3001']
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
+
 app.use(morgan('combined'))
+app.use(cors(corsOptions))
+app.use(express.json())
 
 app.get('/', (req,res) => handlemain.main(req,res,db))
 app.post('/signin', (req,res) => handlesignin.signinAuthentication(req,res,bcrypt,db))
