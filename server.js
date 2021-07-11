@@ -5,14 +5,15 @@ handlemain = require('./controllers/handlemain'),
 handlesignin = require('./controllers/handlesignin'),
 handleprofile = require('./controllers/handleprofile'),
 handleimage = require('./controllers/handleimage'),
-handleregister = require('./controllers/handleregister')
+handleregister = require('./controllers/handleregister'),
+morgan = require('morgan'),
 auth = require('./controllers/authorization');
 
 const knex = require('knex'),
 db=knex({
   client: 'pg',
   connection: {
-    connectionString: process.env.DATABASE_URL,
+    connectionString: process.env.POSTGRES_URL,
     ssl: {
       rejectUnauthorized: false
     }
@@ -22,6 +23,7 @@ db=knex({
 const app = express();
 app.use(express.json())
 app.use(cors())
+app.use(morgan('combined'))
 
 app.get('/', (req,res) => handlemain.main(req,res,db))
 app.post('/signin', (req,res) => handlesignin.signinAuthentication(req,res,bcrypt,db))
