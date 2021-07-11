@@ -11,4 +11,5 @@ Dockerized version of face-detection-api.
 
 #### Important: 
 if you are getting conflict erros, you should run docker stop <container name> that is already running in the background. 
-#### Important: if you are getting other erros, you should run docker-compose down to bring everything down, and start over.
+#### Important: 
+if you are getting other erros, you should run docker-compose down to bring everything down, and start over.
