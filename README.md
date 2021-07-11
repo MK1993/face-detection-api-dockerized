@@ -15,7 +15,7 @@ if you are getting conflict errors, you should run `docker stop <container name>
 if you are getting other errors, you should run `docker-compose down` to bring everything down, 
 and start over.
 
-To access backend's bash: Run `docker-compose exec smart-brain-api bash`
+To access backend's bash: Run `docker-compose exec face-detection-api bash`
 
 To access postgres: (adjust PORT number if needed) Run `psql postgres://<username>:<password>@localhost:5432/face-detection-docker`
 
