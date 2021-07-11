@@ -17,7 +17,7 @@ and start over.
 
 To access backend's bash: Run `docker-compose exec smart-brain-api bash`
 
-To access postgres: (adjust PORT number if needed) Run `psql postgres://<username>:<password>@localhost:5432/smart-brain`
+To access postgres: (adjust PORT number if needed) Run `psql postgres://<username>:<password>@localhost:5432/face-detection-docker`
 
 To access redis: Run `docker-compose exec redis redis-cli`
 
