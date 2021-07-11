@@ -14,3 +14,13 @@ if you are getting conflict erros, you should run `docker stop <container name>`
 #### Important: 
 if you are getting other erros, you should run `docker-compose down` to bring everything down, 
 and start over.
+
+To access backend's bash: Run `docker-compose exec smart-brain-api bash`
+
+To access postgres: (adjust PORT number if needed) Run `psql postgres://<username>:<password>@localhost:5432/smart-brain`
+
+To access redis: Run `docker-compose exec redis redis-cli`
+
+You can grab Clarifai API key [here](https://www.clarifai.com/)
+
+** Make sure you use postgreSQL instead of mySQL for this code base.
