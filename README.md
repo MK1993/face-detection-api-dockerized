@@ -1,1 +1,1 @@
-﻿# FaceDetection-api - Dockerized
+# FaceDetection-api - Dockerized
