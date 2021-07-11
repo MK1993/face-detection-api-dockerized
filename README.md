@@ -9,4 +9,4 @@ Dockerized version of face-detection-api.
 5. You must add your own API key in the `controllers/handleimage.js` file to connect to Clarifai API.
 6. You will also need to update Line 25 in server.js to your client app port (i.e. 3001)
 
-### Important
+#### Important
